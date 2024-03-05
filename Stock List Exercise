@@ -1,0 +1,50 @@
+You are given following list of stocks and their prices in last 3 days,
+
+Stock	Prices
+info	[600,630,620]
+ril	[1430,1490,1567]
+mtl	[234,180,160]
+Write a program that asks user for operation. Value of operations could be,
+- print: When user enters print it should print following,
+info ==> [600, 630, 620] ==> avg:  616.67
+ril ==> [1430, 1490, 1567] ==> avg:  1495.67
+mtl ==> [234, 180, 160] ==> avg:  191.33
+- add: When user enters 'add', it asks for stock ticker and price. If stock already exist in your list (like info, ril etc) then it will append the price to the list. Otherwise it will create new entry in your dictionary. For example entering 'tata' and 560 will add tata ==> [560] to the dictionary of stocks.
+
+Solution:-
+"""You are given following list of stocks and their prices in last 3 days,
+Stock	Prices
+info	[600,630,620]
+ril	[1430,1490,1567]
+mtl	[234,180,160] """
+
+stocks = {"Info": [600, 630, 620],
+          "ril": [1430, 1490, 1567],
+          "mtl": [234, 180, 160]}
+def print_all():
+    for stock, price in stocks.items():
+        avg_price = float(round(sum(price) / len(price), 2))
+        print(f"{stock} ==> {price} ==> avg: {avg_price}")
+    return
+
+def add():
+    stock = input(f"Enter the stock you want to add: ")
+    stock = stock.lower()
+    if stock in stocks:
+        price = float(input(f"{stock} is already added in the list. Please enter the price you want to add: "))
+        stocks[stock].append(price)
+    else:
+        price = float(input(f"Enter the price of the {stock}: "))
+        stocks[stock] = [price]
+    print_all()
+
+def main():
+    op = input("Enter the operation you want to perform from the following (print, add): ")
+    op = op.lower()
+    if op == 'print':
+        print_all()
+    elif op == 'add':
+        add()
+
+if __name__ == '__main__':
+    main()
