@@ -1,0 +1,63 @@
+"""Write a program that asks user for three type of inputs:- 
+- print: if user enter print then it should print all countries with their population in this format, china==>143 india==>136 usa==>32 pakistan==>21 
+- add: if user input 'add' then it should further ask for a country name to add. If country already exist in our dataset then it should print
+that it exist and do nothing. If it doesn't then it asks for population and add that new country/population in our
+dictionary and print it 
+- remove: when user inputs remove it should ask for a country to remove. If country exist in our dictionary then remove it and print new dictionary using format shown above in 
+(a). Else print that countrydoesn't exist! 
+- query: on this again ask user for which country he or she wants to query. When user inputs that
+country it will print population of that country."""
+
+population = {
+    'china': 143,
+    'india': 136,
+    'usa': 32,
+    'pakistan': 21
+}
+def print_all():
+    for c, p in population.items():
+        print(f'{c}==>{p}')
+        return
+
+def add():
+    c = input("Enter the country you want to add: ")
+    c = c.lower()
+    if c in population:
+        print(f"{c} already exists in our database. Terminating")
+    p = input(f"Enter the population of {c}")
+    p = float(p)
+    population[c] = p
+    print_all()
+
+def remove():
+    c = input("Enter the country you want to remove: ")
+    c = c.lower()
+    if c not in population:
+        print(f"{c} is already not there in our database. Terminating")
+        return
+    del population[c]
+    print_all()
+
+def query():
+    c = input("Enter the country you want to query: ")
+    c = c.lower()
+    if c not in population:
+        print(f"{c} is not there in our database. Terminating")
+        return
+    p = population[c]
+    print(f"{c}==>{p}")
+
+def main():
+    op = input("Enter the operation you want to perform from these (print, add, remove, query): ")
+    op = op.lower()
+    if op == 'print':
+        print_all()
+    elif op == 'add':
+        add()
+    elif op == 'remove':
+        remove()
+    elif op == 'query':
+        query()
+
+if __name__ == "__main__":
+    main()
